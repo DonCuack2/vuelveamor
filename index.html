@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confesión de Amor</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('98.png') no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;  
+            border-radius: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 2;
+            position: relative;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff6f91;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            background-color: #ff477e;
+            transform: scale(1.1);
+        }
+        .music-player {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" autoplay loop>
+        <source src="monita.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="card">
+        <h1>PARA MI MONITA</h1>
+        <p id="message">Hola, mi amor. Perdón por volver a contactarte después de haberme ido y haberme comportado como un niño. <br>
+            Te escribo con la esperanza de que, por favor, lo vuelvas a pensar. Lo estoy pasando muy mal, pues extraño tu voz y tus caricias. <br>
+            No sé qué haya pasado por tu cabecita para pensar en terminar todo, pues nuestros problemas se pueden solucionar hablando <br>
+           Te amo mucho, mi niña preciosa y, pues... </p>
+        <div class="button-container">
+            <button onclick="prevMessage()">⏪ Anterior</button>
+            <button onclick="nextMessage()">Siguiente ⏩</button>
+        </div>
+    </div>
+    
+   
+    
+    <script>
+        let currentMessage = 1;
+        const messages = {
+            1: "No puedo negar que estos últimos días, e incluso semanas, han sido difíciles para mí. Desde que nos separamos, he estado pensando mucho en ti y en todo lo que significas para mí. Me he dado cuenta de que no puedo imaginar mi vida sin ti y que lo que más deseo en este momento es volver a estar juntos.",
+                2: "Sé que cometí errores en el pasado y que nuestras diferencias nos llevaron a una separación dolorosa, pero también sé que nuestro amor es más fuerte que cualquier obstáculo.",
+                3: "quizas sientas que nada volvera a ser como antes. Es comprensible y, la verdad, lo entiendo. Durante estos dias he intentado borrar tu sonrisa de mis pensamientos, pero cada queño detalle y cada pequeña cosa me recuerda a los momentos que vivimos juntos ",
+                4: "Y sí, al fin pude entender tus palabras sobre que mi cariño era especial. Hace unos días, alguien me escuchó llorar y, mientras me daba mimos queriendo reconfortarme, fue allí que me di cuenta de que, por más cariño que me traten de dar, no existirá ninguno como el tuyo.",
+                5: "Ahí caí en cuenta de mi error y, para qué mentir... Mientras me mimaban, yo miraba a esta persona darlo todo por animarme. fue ahí donde me rompí aún más, pues fue como escuchar en mi corazon aquellas palabras que un dia dijiste, para que dejara de pensar que no era suficiente. Comprendí que fui un tonto que se dejó llevar por su ego y sus inseguridades, alguien inmaduro y nefasto.",
+                6: "Entiendo que pienses que el amor no es tan fuerte como antes. Lo entiendo, pero también recuerda que ambos nos alejamos por ciertas razones o circunstancias. Quizás tú por la falta de afecto y yo, por mis celos, llegué a hacerte explotar de tal manera. Sé que fue mi error, sé que debí cuidarte más, sé que te lastimé mucho y quizás estás enojada o molesta por mi frialdad y falta de afecto.",
+                7: "Sé que no merecías eso y entiendo que hayas llegado a la conclusión de querer terminar con lo nuestro. En estos días también me han regañado por ser celoso, por el castigo... Pero aquí quiero expresarte mis verdaderos sentimientos y motivos, pues jamás quise alejarte y mucho menos causar nuestra propia ruptura.",
+                8: "Durante tu viaje, e incluso antes, yo ya venía estresado y bajoneado por lo de mi trabajo, que aún se están tardando en contratarme oficialmente; lo de mi familia en Navidad y Año Nuevo, donde solo se centraron en hacerme sentir mal con discusiones e incluso amenazas de quitarme mi herencia. Todo eso ha ido degradando poco a poco mi forma de actuar, volviéndome frío y desalmado, y no te culpo... Es entendible el motivo de tu alejamiento.",
+                9: "Pero, pese a mi comportamiento, siempre te dejé ver lo importante que eras para mí, pues si no mal recuerdo, te agradecí por estar conmigo y hacerme feliz, al menos en una Navidad y un Año Nuevo, cosas que no disfrutaba desde hace mucho tiempo.",
+                10: "Quiero que sepas que estoy dispuesto a hacer todo lo que esté en mi poder para demostrarte que puedo ser la persona que mereces tener a tu lado.",
+                11: "Te extraño mucho y anhelo volver a estar juntos, para reír, para llorar, para crecer juntos y para construir un futuro lleno de amor y felicidad. No llenes tu cabecita con pensamientos intrusivos, pues cuando hay aún amor, todo es posible. No busco hacerte daño, solo busco una solución para dos corazones que se aman mucho ",
+                12: "Por favor, considera la posibilidad de darnos una segunda oportunidad, yo estare esperandote el tiempo que sea necesario pero siempre con los brazos abiertos para cuando quieras volver, aunque tardes una eternidad yo seguire esperandote con mi corazon listo para darte amor........... te amo mucho att: tu monito  "
+
+        };
+        
+        function updateMessage() {
+            document.getElementById('message').textContent = messages[currentMessage];
+        }
+        
+        function prevMessage() {
+            if (currentMessage > 1) {
+                currentMessage--;
+                updateMessage();
+            }
+        }
+        
+        function nextMessage() {
+            if (currentMessage < 12) {
+                currentMessage++;
+                updateMessage();
+            }
+        }
+    </script>
+    <audio id="background-music" loop>
+        <source src="monita.mp3" type="audio/mpeg">
+    </audio>
+</body>
+</html>
